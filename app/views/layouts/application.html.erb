@@ -7,8 +7,26 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class = "container">
+    <div class="content">
+      <% if flash[:notice] %>
+        <div class="alert alert-warning alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
+      <p class="navbar-text pull-right">
+        <% if user_signed_in? %>
+          Welcome <strong><%= current_user.first_name %> | </strong>
+          <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'navbar-link'  %>
+        <% else %>
+          <%= link_to "Sign In", new_user_session_path, class: 'navbar-link' %>
+        <% end %>
+      </p>
 
-<%= yield %>
+      <%= yield %>
 
+    </div> <!-- end content -->
+  </div> <!-- end container -->
 </body>
 </html>

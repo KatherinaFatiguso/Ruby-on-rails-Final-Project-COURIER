@@ -127,3 +127,88 @@ task5 = Task.create!(
 task5.customer = customer3
 task5.user = courier2
 task5.save
+
+
+task6 = Task.create!(
+  from_address: "48 Wilson Street, Harbord NSW 2096",
+  to_address: "203 Botany Road, Alexandria NSW 2015",
+  status: "incomplete",
+  urgency: 2,
+  info: "Please enter through the Loading Dock. Thank you.",
+  start_time: '2015-06-10 10:00:00 am',
+  end_time: '', # the parcel has never been sent
+  sign_required?: true,
+  signed?: false,
+  item_count: 2
+)
+task6.customer = customer1
+task6.user = courier1
+task6.save
+
+
+task7 = Task.create!(
+  from_address: "Shop 5b/ 347 Kent Street, Sydney NSW 2000",
+  to_address: "199 George St, Sydney NSW 2000",
+  status: "incomplete",
+  urgency: 3,
+  info: "Please contact the Reception. Thank you.",
+  start_time: '2015-06-12 10:00:00 am',
+  end_time: '', # the parcel has never been sent
+  sign_required?: true,
+  signed?: false,
+  item_count: 1
+)
+task7.customer = customer2
+task7.user = courier2
+task7.save
+
+
+task8 = Task.create!(
+  from_address: "1a/ 52 Martin Place, Sydney NSW 2000",
+  to_address: "17 Menzies Arc, Sydney NSW 2000",
+  status: "completed",
+  urgency: 2,
+  info: "Please ring the loading dock bell. Thank you.",
+  start_time: '2015-06-13 10:00:00 am',
+  end_time: '2015-06-14 11:00:00 am', # the parcel has never been sent
+  sign_required?: true,
+  signed?: true,
+  item_count: 1
+)
+task8.customer = customer3
+task8.user = courier1
+task8.save
+
+
+task9 = Task.create!(
+  from_address: "199 George St, Sydney NSW 2000",
+  to_address: "255 Elizabeth Street, Sydney NSW 2000",
+  status: "completed",
+  urgency: 1,
+  info: "Please ring the loading dock bell. Thank you.",
+  start_time: '2015-06-09 10:00:00 am',
+  end_time: '2015-06-12 11:00:00 am', # the parcel has never been sent
+  sign_required?: true,
+  signed?: true,
+  item_count: 1
+)
+task9.customer = customer2
+task9.user = courier2
+task9.save
+
+
+task10 = Task.create!(
+  from_address: "4 Wilson Street, Harbord NSW 2096",
+  to_address: "27 Bennelong Road, Homebush Bay NSW 2127",
+  status: "archived",
+  urgency: 1,
+  info: "Please ring the loading dock bell. Thank you.",
+  start_time: '2015-05-09 10:00:00 am',
+  end_time: '2015-05-12 11:00:00 am', # the parcel has never been sent
+  sign_required?: true,
+  signed?: true,
+  item_count: 1
+)
+task10.customer = customer2
+task10.user = courier2
+task10.save

@@ -9,7 +9,7 @@ class CreateTasks < ActiveRecord::Migration
       t.float :from_longitude
       t.float :to_latitude
       t.float :to_longitude
-      t.string :status, default: "new" #new, incomplete, completed, archived
+      t.string :status, default: "new_task" #new, incomplete, completed, archived
       t.string :urgency, default: 1
       t.text :info
       t.datetime :start_time
