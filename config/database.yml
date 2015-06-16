@@ -1,0 +1,25 @@
+  postgres: &postgres
+    adapter: postgresql
+    encoding: unicode
+    pool: 5
+    host: localhost
+    port: 5432
+
+  auth: &auth
+    username: katherinafatiguso
+    password:
+
+  development:
+    <<: *auth
+    <<: *postgres
+    database: courier_development
+
+  test:
+    <<: *auth
+    <<: *postgres
+    database: courier_test
+
+  production:
+    <<: *auth
+    <<: *postgres
+    database: courier_development
