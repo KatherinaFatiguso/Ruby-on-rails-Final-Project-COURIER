@@ -1,29 +1,81 @@
-<h2>Tasks List - Status: New</h2>
-<ul>
-  <% @tasks.new_task.each do |task|  %>
-  <li>ID: <%= task.id %></li>
-  <% end %>
-</ul>
 
-<h2>Tasks List - Status: Incomplete</h2>
-<ul>
-  <% @tasks.incomplete.each do |task|  %>
-  <li>ID: <%= task.id %></li>
-  <% end %>
-</ul>
+<h5>NEW TASKS</h5>
+<div class="table-responsive">
+  <table class="table table-striped table-condensed">
+    <% @tasks.new_task.each do |task|  %>
+      <tr>
+        <td>From: </td>
+        <td><%= link_to task.sender, user_task_url(current_user, task) %></td>
+        <td><%= link_to task.from_address, user_task_url(current_user, task) %></td>
+      </tr>
+      <tr></tr> <!-- keep these empty tr tags here for stripe effects -->
+      <tr>
+        <td>To: </td>
+        <td><%= link_to task.receiver, user_task_url(current_user, task) %></td>
+        <td><%= link_to task.to_address, user_task_url(current_user, task) %></td>
+      </tr>
 
-<h2>Tasks List - Status: Completed</h2>
-<ul>
-  <% @tasks.completed.each do |task|  %>
-  <li>ID: <%= task.id %></li>
-  <% end %>
-</ul>
+    <% end %>
+  </table>
+</div>
+
+<h5>INCOMPLETE TASKS</h5>
+<div class="table-responsive">
+  <table class="table table-striped table-condensed">
+    <% @tasks.incomplete.each do |task|  %>
+      <tr>
+        <td>From: </td>
+        <td><%= link_to task.sender, user_task_url(current_user, task) %></td>
+        <td><%= link_to task.from_address, user_task_url(current_user, task) %></td>
+      </tr>
+      <tr></tr> <!-- keep these empty tr tags here for stripe effects -->
+      <tr>
+        <td>To: </td>
+        <td><%= link_to task.receiver, user_task_url(current_user, task) %></td>
+        <td><%= link_to task.to_address, user_task_url(current_user, task) %></td>
+      </tr>
+
+    <% end %>
+  </table>
+</div>
+
+<h5>COMPLETED TASKS</h5>
+<div class="table-responsive">
+  <table class="table table-striped table-condensed">
+    <% @tasks.completed.each do |task|  %>
+      <tr>
+        <td>From: </td>
+        <td><%= link_to task.sender, user_task_url(current_user, task) %></td>
+        <td><%= link_to task.from_address, user_task_url(current_user, task) %></td>
+      </tr>
+      <tr></tr> <!-- keep these empty tr tags here for stripe effects -->
+      <tr>
+        <td>To: </td>
+        <td><%= link_to task.receiver, user_task_url(current_user, task) %></td>
+        <td><%= link_to task.to_address, user_task_url(current_user, task) %></td>
+      </tr>
+
+    <% end %>
+  </table>
+</div>
 
 <% if (current_user.has_role? :admin) %>
-  <h2>Tasks List - Status: Archived</h2>
-  <ul>
-    <% @tasks.archived.each do |task|  %>
-    <li>ID: <%= task.id %></li>
-    <% end %>
-  </ul>
+  <h5>ARCHIVED TASKS</h5>
+  <div class="table-responsive">
+    <table class="table table-striped table-condensed">
+      <% @tasks.archived.each do |task|  %>
+        <tr>
+          <td>From: </td>
+          <td><%= link_to task.sender, user_task_url(current_user, task) %></td>
+          <td><%= link_to task.from_address, user_task_url(current_user, task) %></td>
+        </tr>
+        <tr></tr> <!-- keep these empty tr tags here for stripe effects -->
+        <tr>
+          <td>To: </td>
+          <td><%= link_to task.receiver, user_task_url(current_user, task) %></td>
+          <td><%= link_to task.to_address, user_task_url(current_user, task) %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
 <% end %>

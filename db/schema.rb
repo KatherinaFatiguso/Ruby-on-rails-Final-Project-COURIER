@@ -51,7 +51,9 @@ ActiveRecord::Schema.define(version: 20150616021346) do
   create_table "tasks", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "customer_id"
+    t.string   "sender"
     t.string   "from_address",                        null: false
+    t.string   "receiver"
     t.string   "to_address",                          null: false
     t.float    "from_latitude"
     t.float    "from_longitude"

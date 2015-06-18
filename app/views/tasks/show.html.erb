@@ -1,0 +1,126 @@
+<div class="pull-left" role="links">
+  <ul class="list-inline">
+    <li> <%= link_to "Task Index", root_url, class: "btn btn-default" %> </li>
+
+    <% if (@task.status == "new_task") %>
+      <li>
+      <%= link_to "Accept", accept_task_user_task_url(current_user, @task), method: :post, data: { confirm: 'Are you sure you want to accept this task?' }, class: "btn btn-default" %>
+      </li>
+    <% end %>
+
+    <li>
+      <%= link_to "Add Messages", new_user_task_message_url(current_user, @task), data: { confirm: 'Add a message to this task?' }, class: "btn btn-default" %>
+    </li>
+
+    <% if (@task.status == "incomplete") %>
+      <li>
+      <%= link_to "Done!", complete_user_task_url(current_user, @task), method: :post, data: { confirm: 'Are you sure it is completed?' }, class: "btn btn-default" %>
+      </li>
+    <% end %>
+
+    <li> <%= link_to "Edit", '', class: "btn btn-warning" %> </li>
+
+    <% if (current_user.has_role? :admin) %>
+      <% if (@task.status == "completed") %>
+        <li>
+        <%= link_to "Archive", '', method: :post, data: { confirm: 'Are you sure it is completed?' }, class: "btn btn-default" %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>
+<br><br>
+<h5>Task ID <%= @task.id %> with status: <strong class="text-uppercase"><%= @task.status %></strong></h5>
+
+<div class="table-responsive">
+  <table class="table table-striped table-condensed">
+    <tr>
+      <td>Courier: </td>
+      <td><%= [@task.user.first_name, @task.user.last_name].compact.join(' ') %></td>
+    </tr>
+    <tr>
+      <td>Customer: </td>
+      <td><%= [@task.customer.first_name, @task.customer.last_name].compact.join(' ') %></td>
+    </tr>
+    <tr>
+      <td>Company: </td>
+      <td><%= @task.customer.company %></td>
+    </tr>
+    <tr>
+      <td>Sender: </td>
+      <td><%= @task.sender %></td>
+    </tr>
+    <tr>
+      <td>From Address: </td>
+      <td><%= @task.from_address %></td>
+    </tr>
+    <tr>
+      <td>Receiver: </td>
+      <td><%= @task.receiver %></td>
+    </tr>
+    <tr>
+      <td>To Address: </td>
+      <td><%= @task.to_address %></td>
+    </tr>
+    <tr>
+      <td>Urgency Level (highest 3): </td>
+      <td><%= @task.urgency %></td>
+    </tr>
+    <tr>
+      <td>Info From Customer: </td>
+      <td><%= @task.info %></td>
+    </tr>
+    <tr>
+      <td>Start Time: </td>
+      <td>
+        <% if (@task.start_time).present? %>
+        <%= @task.start_time.localtime.strftime("%d %B %Y %Z") %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td>End Time: </td>
+      <td>
+        <% if (@task.end_time).present? %>
+        <%= @task.end_time.localtime.strftime("%d %B %Y %Z") %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td>Signature Required? </td>
+      <td><%= @task.sign_required? %></td>
+    </tr>
+    <tr>
+      <td>Signed? </td>
+      <td><%= @task.signed? %></td>
+    </tr>
+    <tr>
+      <td>Item Count </td>
+      <td><%= @task.item_count %></td>
+    </tr>
+    <tr>
+      <td>Created At: </td>
+      <td><%= @task.created_at.localtime.strftime("%d %B %Y %Z") %></td>
+    </tr>
+    <tr>
+      <td>Updated At: </td>
+      <td><%= @task.updated_at.localtime.strftime("%d %B %Y %Z") %></td>
+    </tr>
+  </table>
+</div>
+
+<h5>Messages of This Task</h5>
+
+
+
+
+<div class="table-responsive">
+  <table class="table table-striped table-condensed">
+    <% @task.messages.each do |m| %>
+    <tr>
+      <td><%= m.created_at.localtime.strftime("%d %B %Y %Z") %></td>
+      <td><%= m.description %></td>
+    </tr>
+    <% end %>
+  </table>
+</div>

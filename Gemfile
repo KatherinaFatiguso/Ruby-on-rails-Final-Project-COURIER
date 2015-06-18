@@ -55,4 +55,9 @@ group :development, :test do
   gem 'geocoder'
   gem 'rolify'
   gem 'cancancan', '~> 1.10'
+  
+  source 'https://rails-assets.org' do
+    gem 'rails-assets-bootstrap'
+  end
+
 end

@@ -3,7 +3,9 @@ class CreateTasks < ActiveRecord::Migration
     create_table :tasks do |t|
       t.references :user
       t.references :customer
+      t.string :sender, null: false
       t.string :from_address, null: false
+      t.string :receiver, null: false
       t.string :to_address, null: false
       t.float :from_latitude
       t.float :from_longitude

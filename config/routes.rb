@@ -2,19 +2,29 @@ Rails.application.routes.draw do
   devise_for :users
 
   root 'tasks#index'
+  # a user has many tasks and messages
   resources :users do
+
+    # a tasks has many messages
     resources :tasks do
-      resources :message
+      member do
+        post :accept_task
+        post :complete
+      end
+      # a message belongs to a task
+      resources :messages
     end
 
-    resources :message
+    # a message belongs to a user
+    resources :messages
   end
 
+  # a customer has many tasks
   resources :customers do
+    # a task belongs to a customer
     resources :tasks
   end
 
-  resources :user
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
