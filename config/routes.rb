@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       member do
         post :accept_task
         post :complete
+        post :archive
       end
       # a message belongs to a task
       resources :messages

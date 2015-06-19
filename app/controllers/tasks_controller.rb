@@ -9,8 +9,54 @@ class TasksController < ApplicationController
     end
   end
 
-  def show
+  def new
+    @task = Task.new
+  end
+
+  def create
+    @task = Task.new(params.require(:task).permit(
+      :user_id,
+      :customer_id,
+      :sender,
+      :from_address,
+      :receiver,
+      :to_address,
+      :status,
+      :urgency,
+      :info,
+      :sign_required?,
+      :signed?,
+      :item_count
+    ))
+
+    if @task.save
+      redirect_to user_task_url(current_user, @task) #redirect to tasks#show
+    else
+      render :new
+    end
+  end
+
+  def edit
     @task = Task.find(params[:id])
+  end
+
+  def update
+    if Task.find(params[:id])
+      redirect_to user_task_url(current_user, @task), notice: "Task Updated."
+    else
+      render :edit
+    end
+
+  end
+
+  def show
+    @task = Task.find(params[:id]).decorate
+  end
+
+  def accept_task
+    @task = Task.find(params[:id])
+    @task.accept!
+    redirect_to user_task_url(current_user, @task), notice: "Task Accepted."
   end
 
   def complete
@@ -19,10 +65,10 @@ class TasksController < ApplicationController
     redirect_to user_task_url(current_user, @task), notice: "Task Completed."
   end
 
-  def accept_task
+  def archive
     @task = Task.find(params[:id])
-    @task.accept!
-    redirect_to user_task_url(current_user, @task), notice: "Task Accepted."
+    @task.archive!
+    redirect_to user_task_url(current_user, @task), notice: "Task Archived."
   end
 
   private

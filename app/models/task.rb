@@ -7,6 +7,9 @@ class Task < ActiveRecord::Base
   scope :incomplete, -> { where(status: 'incomplete') }
   scope :completed, -> { where(status: 'completed') }
   scope :archived, -> { where(status: 'archived') }
+  scope :signature_required, -> { where(sign_required?: true ) }
+  scope :signed, -> { where(signed?: true ) }
+
   # geocoded_by :from_address, :latitude => :from_latitude, :longitude => :from_longitude
   # geocoded_by :to_address, :latitude => :to_latitude, :longitude => :to_longitude
   # after_validation :geocode
@@ -32,6 +35,11 @@ class Task < ActiveRecord::Base
   def complete!
     self.end_time = Time.now
     self.status = 'completed'
+    self.save!
+  end
+
+  def archive!
+    self.status = 'archived'
     self.save!
   end
 
