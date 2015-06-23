@@ -10,7 +10,7 @@ class MessagesController < ApplicationController
     @message.user_id = current_user.id
     @message.task_id = @task.id
     if @message.save
-      redirect_to user_task_url(current_user, @task), notice: 'Message was created successfully.'
+      redirect_to task_url(@task), notice: 'Message was created successfully.'
     else
       render :new
     end

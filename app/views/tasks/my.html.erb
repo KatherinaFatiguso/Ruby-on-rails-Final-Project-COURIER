@@ -1,0 +1,71 @@
+<p>My Last Recorded Location: <%= current_user.curr_addr %></p>
+<p>My Last Recorded Latitude: <%= current_user.curr_lat %></p>
+<p>My Last Recorded Longitude: <%= current_user.curr_long %></p>
+
+<% if @tasks.incomplete.overdue.present? %>
+  <h3>URGENT PRIORITY</h3>
+  <div class="table-responsive">
+    <table class="table table-striped table-condensed">
+      <% @tasks.incomplete.overdue.each do |task| %>
+        <tr>
+          <td>From: </td>
+          <td><%= link_to task.sender, task_url(task) %></td>
+          <td><%= link_to task.from_address, task_url(task) %></td>
+        </tr>
+        <tr></tr> <!-- keep these empty tr tags here for double stripe effects -->
+        <tr>
+          <td>To: </td>
+          <td><%= link_to task.receiver, task_url(task) %></td>
+          <td><%= link_to task.to_address, task_url(task) %></td>
+        </tr>
+
+      <% end %>
+    </table>
+  </div>
+<% end %>
+
+<% if @tasks.incomplete.todays.present? %>
+  <h3>CURRENT ACTIVE TASK</h3>
+  <div class="table-responsive">
+    <table class="table table-striped table-condensed">
+      <% @tasks.incomplete.todays.each do |task| %>
+        <tr>
+          <td>From: </td>
+          <td><%= link_to task.sender, task_url(task) %></td>
+          <td><%= link_to task.from_address, task_url(task) %></td>
+        </tr>
+        <tr></tr> <!-- keep these empty tr tags here for double stripe effects -->
+        <tr>
+          <td>To: </td>
+          <td><%= link_to task.receiver, task_url(task) %></td>
+          <td><%= link_to task.to_address, task_url(task) %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+<% end %>
+
+<% if Task.all.new_task.present? %>
+  <h3>TODAY'S TASKS</h3>
+  <div class="table-responsive">
+    <table class="table table-striped table-condensed">
+      <% Task.all.new_task.each do |task| %>
+        <tr>
+          <td>From: </td>
+          <td><%= link_to task.sender, task_url(task) %></td>
+          <td><%= link_to task.from_address, task_url(task) %></td>
+        </tr>
+        <tr></tr> <!-- keep these empty <tr> here for double stripe effects -->
+        <tr>
+          <td>To: </td>
+          <td><%= link_to task.receiver, task_url(task) %></td>
+          <td><%= link_to task.to_address, task_url(task) %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+<% end %>
+
+<% if !(Task.all.new_task).present? %>
+  <h3>There is no pending task.</h3>
+<% end %>

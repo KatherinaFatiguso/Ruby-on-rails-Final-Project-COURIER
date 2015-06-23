@@ -2,11 +2,13 @@ class TasksController < ApplicationController
   # before_action :find_task, except: [:new, :index, :create]
 
   def index
-    if current_user.has_role? :admin
-      @tasks = Task.all
-    else
-      @tasks = current_user.tasks
-    end
+    redirect_to my_tasks_url unless current_user.has_role?(:admin) # Couriers logins will be redirected to my_tasks_url
+    @tasks = Task.all # Admin users can see all tasks.
+  end
+
+  def my
+    @tasks = current_user.tasks
+    @tasks.sorted(current_user.curr_lat, current_user.curr_long)
   end
 
   def new
@@ -30,7 +32,7 @@ class TasksController < ApplicationController
     ))
 
     if @task.save
-      redirect_to user_task_url(current_user, @task) #redirect to tasks#show
+      redirect_to task_url(@task) #redirect to tasks#show
     else
       render :new
     end
@@ -42,7 +44,7 @@ class TasksController < ApplicationController
 
   def update
     if Task.find(params[:id])
-      redirect_to user_task_url(current_user, @task), notice: "Task Updated."
+      redirect_to task_url(@task), notice: "Task Updated."
     else
       render :edit
     end
@@ -56,20 +58,23 @@ class TasksController < ApplicationController
   def accept_task
     @task = Task.find(params[:id])
     @task.accept!
-    redirect_to user_task_url(current_user, @task), notice: "Task Accepted."
+    redirect_to task_url(@task), notice: "Task Accepted."
   end
 
   def complete
     @task = Task.find(params[:id])
     @task.complete!
-    redirect_to user_task_url(current_user, @task), notice: "Task Completed."
+    current_user.update_location(@task.to_address)
+    redirect_to task_url(@task), notice: "Task Completed."
   end
 
   def archive
     @task = Task.find(params[:id])
     @task.archive!
-    redirect_to user_task_url(current_user, @task), notice: "Task Archived."
+    redirect_to task_url(@task), notice: "Task Archived."
   end
+
+
 
   private
 

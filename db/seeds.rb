@@ -86,7 +86,6 @@ task1 = Task.create!(
   item_count: 1
 )
 task1.customer = customer1
-task1.user = courier1
 task1.save
 
 task2 = Task.create!(
@@ -99,19 +98,17 @@ task2 = Task.create!(
   item_count: 1
 )
 task2.customer = customer2
-task2.user = courier2
 task2.save
 
 task3 = Task.create!(
   sender: "Donna Karan",
-  from_address: "28 Ilma Street, Condell Park NSW 2200",
+  from_address: "40 Lucy St, Ashfield NSW 2131",
   receiver: "Murray Mayne",
   to_address: "280 Pitt St, Sydney NSW 2000",
   info: "Please enter through the Loading Dock. Thank you.",
   item_count: 3
 )
 task3.customer = customer3
-task3.user = courier1
 task3.save
 
 task4 = Task.create!(
@@ -123,25 +120,23 @@ task4 = Task.create!(
   item_count: 2
 )
 task4.customer = customer3
-task4.user = courier1
 task4.save
 
 task5 = Task.create!(
   sender: "Mary Poppler",
-  from_address: "4 Wilson Street, Harbord NSW 2096",
+  from_address: "1 Rothschild Ave, Rosebery NSW 2018",
   receiver: "Peter Sanders",
   to_address: "255 Pitt St, Sydney NSW 2000",
   info: "Please enter through the Loading Dock. Thank you.",
   item_count: 1
 )
 task5.customer = customer3
-task5.user = courier2
 task5.save
 
 
 task6 = Task.create!(
   sender: "Jonathan Anton",
-  from_address: "48 Wilson Street, Harbord NSW 2096",
+  from_address: "7 Henry Street, Parramatta NSW 2150",
   receiver: "Mary William",
   to_address: "203 Botany Road, Alexandria NSW 2015",
   status: "incomplete",
@@ -192,7 +187,6 @@ task8 = Task.create!(
   item_count: 1
 )
 task8.customer = customer3
-task8.user = courier1
 task8.save
 
 
@@ -211,15 +205,14 @@ task9 = Task.create!(
   item_count: 1
 )
 task9.customer = customer2
-task9.user = courier2
 task9.save
 
 
 task10 = Task.create!(
   sender: "Mary Wilson",
-  from_address: "4 Wilson Street, Harbord NSW 2096",
+  from_address: "65 Meeks St, Kingsford NSW 2032",
   receiver: "Jim Sanders",
-  to_address: "27 Bennelong Road, Homebush Bay NSW 2127",
+  to_address: "38 Hunter Street, Hornsby NSW 2077",
   status: "archived",
   urgency: 1,
   info: "Please ring the loading dock bell. Thank you.",
@@ -230,5 +223,4 @@ task10 = Task.create!(
   item_count: 1
 )
 task10.customer = customer2
-task10.user = courier2
 task10.save

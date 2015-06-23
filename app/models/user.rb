@@ -23,4 +23,11 @@ class User < ActiveRecord::Base
     [self.first_name, self.last_name].join(' ')
   end
 
+  def update_location(address)
+    self.curr_addr = address
+    to_coord = Geocoder.coordinates(address)
+    self.curr_lat = to_coord[0]
+    self.curr_long = to_coord[1]
+    self.save!
+  end
 end

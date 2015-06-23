@@ -10,7 +10,7 @@
       </div>
     <% end %>
 
-    <%= simple_form_for [current_user, @task, @message] do |f| %>
+    <%= simple_form_for [@task, @message] do |f| %>
       <%= f.input :description %>
       <%= f.submit %>
     <% end %>

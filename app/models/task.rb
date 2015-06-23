@@ -9,10 +9,17 @@ class Task < ActiveRecord::Base
   scope :archived, -> { where(status: 'archived') }
   scope :signature_required, -> { where(sign_required?: true ) }
   scope :signed, -> { where(signed?: true ) }
+  scope :overdue, -> { where('start_time < ?', Time.now - 1.day) }
+  scope :todays, -> { where('start_time >= ?', Time.now - 1.day) }
+
+  def self.sorted(curr_lat, curr_long)
+    order("point (#{curr_lat}, #{curr_long}) <@> point (from_latitude, from_longitude)")
+  end
 
   # geocoded_by :from_address, :latitude => :from_latitude, :longitude => :from_longitude
   # geocoded_by :to_address, :latitude => :to_latitude, :longitude => :to_longitude
   # after_validation :geocode
+
 
   after_validation :geocode_addresses
 
@@ -32,6 +39,7 @@ class Task < ActiveRecord::Base
     self.save!
   end
 
+
   def complete!
     self.end_time = Time.now
     self.status = 'completed'
@@ -42,5 +50,6 @@ class Task < ActiveRecord::Base
     self.status = 'archived'
     self.save!
   end
+
 
 end

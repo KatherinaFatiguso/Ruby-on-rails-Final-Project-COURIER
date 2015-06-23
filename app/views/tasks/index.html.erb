@@ -5,14 +5,14 @@
     <% @tasks.new_task.each do |task|  %>
       <tr>
         <td>From: </td>
-        <td><%= link_to task.sender, user_task_url(current_user, task) %></td>
-        <td><%= link_to task.from_address, user_task_url(current_user, task) %></td>
+        <td><%= link_to task.sender, task_url(task) %></td>
+        <td><%= link_to task.from_address, task_url(task) %></td>
       </tr>
       <tr></tr> <!-- keep these empty tr tags here for stripe effects -->
       <tr>
         <td>To: </td>
-        <td><%= link_to task.receiver, user_task_url(current_user, task) %></td>
-        <td><%= link_to task.to_address, user_task_url(current_user, task) %></td>
+        <td><%= link_to task.receiver, task_url(task) %></td>
+        <td><%= link_to task.to_address, task_url(task) %></td>
       </tr>
 
     <% end %>
@@ -25,14 +25,14 @@
     <% @tasks.incomplete.each do |task|  %>
       <tr>
         <td>From: </td>
-        <td><%= link_to task.sender, user_task_url(current_user, task) %></td>
-        <td><%= link_to task.from_address, user_task_url(current_user, task) %></td>
+        <td><%= link_to task.sender, task_url(task) %></td>
+        <td><%= link_to task.from_address, task_url(task) %></td>
       </tr>
       <tr></tr> <!-- keep these empty tr tags here for stripe effects -->
       <tr>
         <td>To: </td>
-        <td><%= link_to task.receiver, user_task_url(current_user, task) %></td>
-        <td><%= link_to task.to_address, user_task_url(current_user, task) %></td>
+        <td><%= link_to task.receiver, task_url(task) %></td>
+        <td><%= link_to task.to_address, task_url(task) %></td>
       </tr>
 
     <% end %>
@@ -45,14 +45,14 @@
     <% @tasks.completed.each do |task|  %>
       <tr>
         <td>From: </td>
-        <td><%= link_to task.sender, user_task_url(current_user, task) %></td>
-        <td><%= link_to task.from_address, user_task_url(current_user, task) %></td>
+        <td><%= link_to task.sender, task_url(task) %></td>
+        <td><%= link_to task.from_address, task_url(task) %></td>
       </tr>
       <tr></tr> <!-- keep these empty tr tags here for stripe effects -->
       <tr>
         <td>To: </td>
-        <td><%= link_to task.receiver, user_task_url(current_user, task) %></td>
-        <td><%= link_to task.to_address, user_task_url(current_user, task) %></td>
+        <td><%= link_to task.receiver, task_url(task) %></td>
+        <td><%= link_to task.to_address, task_url(task) %></td>
       </tr>
 
     <% end %>
@@ -66,14 +66,14 @@
       <% @tasks.archived.each do |task|  %>
         <tr>
           <td>From: </td>
-          <td><%= link_to task.sender, user_task_url(current_user, task) %></td>
-          <td><%= link_to task.from_address, user_task_url(current_user, task) %></td>
+          <td><%= link_to task.sender, task_url(task) %></td>
+          <td><%= link_to task.from_address, task_url(task) %></td>
         </tr>
         <tr></tr> <!-- keep these empty tr tags here for stripe effects -->
         <tr>
           <td>To: </td>
-          <td><%= link_to task.receiver, user_task_url(current_user, task) %></td>
-          <td><%= link_to task.to_address, user_task_url(current_user, task) %></td>
+          <td><%= link_to task.receiver, task_url(task) %></td>
+          <td><%= link_to task.to_address, task_url(task) %></td>
         </tr>
       <% end %>
     </table>

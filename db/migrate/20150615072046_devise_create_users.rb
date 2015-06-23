@@ -3,6 +3,11 @@ class DeviseCreateUsers < ActiveRecord::Migration
     create_table(:users) do |t|
       t.string :first_name, null: false, default: ""
       t.string :last_name, null: false, default: ""
+      t.float :curr_lat, default: -33.889242
+      t.float :curr_long, default: 151.199098
+      t.string :curr_addr, default: "7 Hudson Street Redfern NSW 2016" # Homebase
+
+
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
