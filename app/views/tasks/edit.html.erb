@@ -17,8 +17,11 @@
     </div>
     <br><br>
     <h5>Edit Task ID <%= @task.id %>, status: <strong class="text-uppercase"><%= @task.status %></strong></h5>
-
-    <%= render partial: 'form' %>
+    <% if current_user.has_role? :admin %>
+      <%= render partial: 'form' %>
+    <% elsif current_user.has_role? :courier %>
+      <%= render partial: 'form1' %>
+    <% end %>
 
   </div>
 </div>

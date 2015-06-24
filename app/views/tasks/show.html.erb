@@ -1,30 +1,29 @@
 <div class="pull-left" role="links">
   <ul class="list-inline">
-    <li><%= link_to "Tasks Index", root_url, class: "btn btn-info btn-sm" %></li>
+    <li><%= link_to "Tasks Index", root_url, class: "btn btn-primary btn-sm" %></li>
 
     <% if (@task.status == "new_task") %>
       <li><%= link_to "Accept This Task", accept_task_task_url(@task), method: :post, data: { confirm: 'Are you sure you want to accept this task?' }, class: "btn btn-warning btn-sm" %></li>
     <% end %>
 
-    <li><%= link_to "Add Message", new_task_message_url(@task), data: { confirm: 'Add a message to this task?' }, class: "btn btn-info btn-sm" %></li>
+    <li><%= link_to "Add Message", new_task_message_url(@task), data: { confirm: 'Add a message to this task?' }, class: "btn btn-primary btn-sm" %></li>
 
-    <% if (current_user.has_role? :admin) %>
-      <li><%= link_to "Edit", edit_task_url(@task),  data: { confirm: 'Edit this task?' }, class: "btn btn-info btn-sm" %></li>
-    <% end %>
+    <li><%= link_to "Edit", edit_task_url(@task),  data: { confirm: 'Edit this task?' }, class: "btn btn-primary btn-sm" %></li>
 
     <% if (@task.status == "incomplete") %>
       <li><%= link_to "Done!", complete_task_url(@task), method: :post, data: { confirm: 'Are you sure it is completed?' }, class: "btn btn-success btn-sm" %></li>
     <% end %>
 
-    <% if (current_user.has_role? :admin) %>
-      <li><%= link_to "New Task", new_task_url, data: { confirm: 'Create a New Task?' }, class: "btn btn-primary btn-sm" %></li>
+    <% if current_user.has_role? :admin %>
+      <li><%= link_to "Create Task", new_task_url, data: { confirm: 'Create a New Task?' }, class: "btn btn-primary btn-sm" %></li>
     <% end %>
 
-    <% if (current_user.has_role? :admin) %>
+    <% if current_user.has_role? :admin %>
       <% if (@task.status == "completed") %>
         <li><%= link_to "Archive", archive_task_url(@task), method: :post, data: { confirm: 'Archive this Task?' }, class: "btn btn-warning btn-sm" %></li>
       <% end %>
     <% end %>
+
 
   </ul>
 </div>
@@ -72,18 +71,18 @@
       </td>
     </tr>
     <tr>
-      <td>Start Time: </td>
+      <td>Task Accepted At: </td>
       <td>
-        <% if (@task.start_time).present? %>
-        <%= @task.start_time.localtime.strftime("%A, %d %b %Y %l:%M %p %Z") %>
+        <% if (@task.accepted_time).present? %>
+        <%= @task.accepted_time.localtime.strftime("%A, %d %b %Y %l:%M %p %Z") %>
         <% end %>
       </td>
     </tr>
     <tr>
-      <td>End Time: </td>
+      <td>Task Accomplished At: </td>
       <td>
-        <% if (@task.end_time).present? %>
-        <%= @task.end_time.localtime.strftime("%A, %d %b %Y %l:%M %p %Z") %>
+        <% if (@task.accomplished_time).present? %>
+        <%= @task.accomplished_time.localtime.strftime("%A, %d %b %Y %l:%M %p %Z") %>
         <% end %>
       </td>
     </tr>
@@ -111,16 +110,12 @@
 </div>
 
 <h5>Messages of This Task</h5>
-
-
-
-
 <div class="table-responsive">
   <table class="table table-striped table-condensed">
     <% @task.messages.each do |m| %>
     <tr>
       <td><%= m.created_at.localtime.strftime("%A, %d %b %Y %l:%M %p %Z") %></td>
-      <td>(<%= m.user.first_name %>) <%= m.description %></td>
+      <td>(<%= m.user.name %>) <%= m.description %></td>
     </tr>
     <% end %>
   </table>

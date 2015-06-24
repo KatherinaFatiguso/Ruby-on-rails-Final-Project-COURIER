@@ -82,7 +82,7 @@ task1 = Task.create!(
   receiver: "Martin Broadbill",
   to_address: "51 Old Barrenjoey Road, Avalon NSW 2107",
   info: "Please leave at the backdoor. Thank you.",
-  sign_required?: true,
+  sign_required: true,
   item_count: 1
 )
 task1.customer = customer1
@@ -94,7 +94,7 @@ task2 = Task.create!(
   receiver: "Jesse Alban",
   to_address: "27 Bennelong Road, Homebush Bay NSW 2127",
   info: "Please advise the Reception. Thank you.",
-  sign_required?: true,
+  sign_required: true,
   item_count: 1
 )
 task2.customer = customer2
@@ -140,12 +140,11 @@ task6 = Task.create!(
   receiver: "Mary William",
   to_address: "203 Botany Road, Alexandria NSW 2015",
   status: "incomplete",
-  urgency: 2,
   info: "Please report to the Reception. Thank you.",
-  start_time: '2015-06-10 10:00:00 am',
-  end_time: '', # the parcel has never been sent
-  sign_required?: true,
-  signed?: false,
+  accepted_time: '2015-06-10 10:00:00 am',
+  accomplished_time: '', # the parcel has never been sent
+  sign_required: true,
+  signed: false,
   item_count: 2
 )
 task6.customer = customer1
@@ -159,12 +158,11 @@ task7 = Task.create!(
   receiver: "William Marshall",
   to_address: "199 George St, Sydney NSW 2000",
   status: "incomplete",
-  urgency: 3,
   info: "Please contact the Reception. Thank you.",
-  start_time: '2015-06-12 10:00:00 am',
-  end_time: '', # the parcel has never been sent
-  sign_required?: true,
-  signed?: false,
+  accepted_time: '2015-06-12 10:00:00 am',
+  accomplished_time: '', # the parcel has never been sent
+  sign_required: true,
+  signed: false,
   item_count: 1
 )
 task7.customer = customer2
@@ -178,12 +176,11 @@ task8 = Task.create!(
   receiver: "Maria Martina",
   to_address: "17 Menzies Arc, Sydney NSW 2000",
   status: "completed",
-  urgency: 2,
   info: "Please ring the loading dock bell. Thank you.",
-  start_time: '2015-06-13 10:00:00 am',
-  end_time: '2015-06-14 11:00:00 am', # the parcel was sent successfully
-  sign_required?: true,
-  signed?: true,
+  accepted_time: '2015-06-13 10:00:00 am',
+  accomplished_time: '2015-06-14 11:00:00 am', # the parcel was sent successfully
+  sign_required: true,
+  signed: true,
   item_count: 1
 )
 task8.customer = customer3
@@ -196,12 +193,11 @@ task9 = Task.create!(
   receiver: "Steve Pirrotina",
   to_address: "255 Elizabeth Street, Sydney NSW 2000",
   status: "completed",
-  urgency: 1,
   info: "Please ring the loading dock bell. Thank you.",
-  start_time: '2015-06-09 10:00:00 am',
-  end_time: '2015-06-12 11:00:00 am', # the parcel was sent successfully
-  sign_required?: true,
-  signed?: true,
+  accepted_time: '2015-06-09 10:00:00 am',
+  accomplished_time: '2015-06-12 11:00:00 am', # the parcel was sent successfully
+  sign_required: true,
+  signed: true,
   item_count: 1
 )
 task9.customer = customer2
@@ -214,12 +210,11 @@ task10 = Task.create!(
   receiver: "Jim Sanders",
   to_address: "38 Hunter Street, Hornsby NSW 2077",
   status: "archived",
-  urgency: 1,
   info: "Please ring the loading dock bell. Thank you.",
-  start_time: '2015-05-09 10:00:00 am',
-  end_time: '2015-05-12 11:00:00 am', # the parcel was sent successfully
-  sign_required?: true,
-  signed?: true,
+  accepted_time: '2015-05-09 10:00:00 am',
+  accomplished_time: '2015-05-12 11:00:00 am', # the parcel was sent successfully
+  sign_required: true,
+  signed: true,
   item_count: 1
 )
 task10.customer = customer2

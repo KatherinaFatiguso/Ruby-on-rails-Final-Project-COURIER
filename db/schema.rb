@@ -53,24 +53,23 @@ ActiveRecord::Schema.define(version: 20150621234828) do
   create_table "tasks", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "customer_id"
-    t.string   "sender",                              null: false
-    t.string   "from_address",                        null: false
-    t.string   "receiver",                            null: false
-    t.string   "to_address",                          null: false
+    t.string   "sender",                                 null: false
+    t.string   "from_address",                           null: false
+    t.string   "receiver",                               null: false
+    t.string   "to_address",                             null: false
     t.float    "from_latitude"
     t.float    "from_longitude"
     t.float    "to_latitude"
     t.float    "to_longitude"
-    t.string   "status",         default: "new_task"
-    t.string   "urgency",        default: "1"
+    t.string   "status",            default: "new_task"
     t.text     "info"
-    t.datetime "start_time"
-    t.datetime "end_time"
-    t.boolean  "sign_required?", default: false
-    t.boolean  "signed?",        default: false
-    t.integer  "item_count",     default: 0
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "accepted_time"
+    t.datetime "accomplished_time"
+    t.boolean  "sign_required",     default: false
+    t.boolean  "signed",            default: false
+    t.integer  "item_count",        default: 0
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
   end
 
   create_table "users", force: :cascade do |t|

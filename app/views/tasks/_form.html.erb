@@ -1,15 +1,13 @@
-
     <%= simple_form_for [@task] do |f| %>
-      <%= f.association :user, collection: User.all %>
+      <%= f.association :user, label: 'Select A Courier (Optional)', collection: @couriers %>
       <%= f.association :customer, collection: Customer.all %>
       <%= f.input :sender %>
       <%= f.input :from_address %>
       <%= f.input :receiver %>
       <%= f.input :to_address %>
-      <%= f.input :urgency, collection: 1..3, prompt: 'Basic - 1' %>
       <%= f.input :info %>
-      <%= f.input :sign_required? %>
-      <%= f.input :signed? %>
+      <%= f.input :sign_required?, as: :boolean, checked_value: true %>
+      <%= f.input :signed?, as: :boolean, checked_value: true, unchecked_value: false %>
       <%= f.input :item_count %>
       <%= f.submit %>
     <% end %>

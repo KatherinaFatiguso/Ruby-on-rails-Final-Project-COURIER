@@ -9,8 +9,8 @@ class Task < ActiveRecord::Base
   scope :archived, -> { where(status: 'archived') }
   scope :signature_required, -> { where(sign_required?: true ) }
   scope :signed, -> { where(signed?: true ) }
-  scope :overdue, -> { where('start_time < ?', Time.now - 1.day) }
-  scope :todays, -> { where('start_time >= ?', Time.now - 1.day) }
+  scope :overdue, -> { where('accepted_time < ?', Time.now - 1.day) }
+  scope :todays, -> { where('accepted_time >= ?', Time.now - 1.day) }
 
   def self.sorted(curr_lat, curr_long)
     order("point (#{curr_lat}, #{curr_long}) <@> point (from_latitude, from_longitude)")
@@ -24,24 +24,27 @@ class Task < ActiveRecord::Base
   after_validation :geocode_addresses
 
   def geocode_addresses
-    from_coord = Geocoder.coordinates(self.from_address)
-    self.from_latitude = from_coord[0]
-    self.from_longitude = from_coord[1]
-    sleep(3) # To avoid exceeding the per-second limit
-    to_coord = Geocoder.coordinates(self.to_address)
-    self.to_latitude = to_coord[0]
-    self.to_longitude = to_coord[1]
+    if from_address_changed?
+      from_coord = Geocoder.coordinates(self.from_address)
+      self.from_latitude = from_coord[0]
+      self.from_longitude = from_coord[1]
+      sleep(3) # To avoid exceeding the per-second limit
+      to_coord = Geocoder.coordinates(self.to_address)
+      self.to_latitude = to_coord[0]
+      self.to_longitude = to_coord[1]
+    end
   end
 
   def accept!
-    self.start_time = Time.now
+    self.accepted_time = Time.now
+    self.user = current_user
     self.status = 'incomplete'
     self.save!
   end
 
 
   def complete!
-    self.end_time = Time.now
+    self.accomplished_time = Time.now
     self.status = 'completed'
     self.save!
   end

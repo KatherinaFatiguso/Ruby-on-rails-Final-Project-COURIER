@@ -1,0 +1,21 @@
+<div class="pull-left" role="links">
+  <ul class="list-inline">
+    <li><%= link_to "Tasks Index", root_url, class: "btn btn-primary btn-sm" %></li>
+  </ul>
+</div>
+<br><br>
+<h5>LIST OF CUSTOMERS</h5>
+<div class="table-responsive">
+  <% @customers.each do |c| %>
+    <table class="table table-bordered table-condensed">
+        <tr><td>CUSTOMER ID: </td><td><%= c.id %></td></tr>
+        <tr><td>NAME:</td><td><%= [c.first_name, c.last_name].join(' ') %></td></tr>
+        <tr><td>COMPANY:</td><td><%= c.company %></td></tr>
+        <tr><td>PHONE 1:</td><td><%= c.phone1 %></td></tr>
+        <tr><td>PHONE 2:</td><td><%= c.phone2 %></td></tr>
+        <tr><td>EMAIL:</td><td><%= c.email %></td></tr>
+        <tr><td>ADDRESS:</td><td><%= c.address %></td></tr>
+        <tr><td>COMMENT:</td><td><%= c.comment %></td></tr>
+    </table>
+  <% end %>
+</div>

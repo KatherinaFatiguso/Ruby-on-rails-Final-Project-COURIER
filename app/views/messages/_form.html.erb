@@ -9,11 +9,10 @@
         </ul>
       </div>
     <% end %>
-
-    <%= simple_form_for [@task, @message] do |f| %>
-      <%= f.input :description %>
-      <%= f.submit %>
-    <% end %>
-
   </div>
 </div>
+
+<%= simple_form_for [@task, @message] do |f| %>
+  <%= f.input :description, label: "Enter Description: " %>
+  <%= f.submit %>
+<% end %>

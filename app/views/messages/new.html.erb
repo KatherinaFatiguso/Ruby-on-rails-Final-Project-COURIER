@@ -1,3 +1,9 @@
-<h5>New Messages</h5>
+<div class="pull-left" role="links">
+  <ul class="list-inline">
+    <li><%= link_to "Back To Task Details", task_url(@task), class: "btn btn-primary btn-sm" %></li>
+  </ul>
+</div>
+<br><br>
+<h5>NEW MESSAGE</h5>
 
 <%= render partial: 'form' %>
