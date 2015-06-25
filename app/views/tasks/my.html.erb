@@ -1,71 +1,117 @@
-<p>My Last Recorded Location: <%= current_user.curr_addr %></p>
-<p>My Last Recorded Latitude: <%= current_user.curr_lat %></p>
-<p>My Last Recorded Longitude: <%= current_user.curr_long %></p>
+<br><br>
+<div class="panel panel-danger yellow">
+  <div class="panel-body">
+    <div class="row">
+      <small>
+      <div class="col-sm-4">
+        <strong>My Last Recorded Location:</strong><br>
+        <%= current_user.curr_addr %>
+      </div>
+      <div class="col-sm-4">
+        <strong>Latitude:</strong><br>
+        <%= current_user.curr_lat %>
+      </div>
+      <div class="col-sm-4">
+        <strong>Longitude:</strong><br>
+        <%= current_user.curr_long %>
+      </div>
+      </small>
+    </div>
+  </div>
+</div>
 
-<% if @tasks.incomplete.overdue.present? %>
-  <h3>URGENT PRIORITY</h3>
-  <div class="table-responsive">
-    <table class="table table-striped table-condensed">
+<ul class="nav nav-tabs" role="tablist">
+  <li role="presentation" class="active"><a href="#overdue" aria-controls="overdue" role="tab" data-toggle="tab">Overdue</a></li>
+  <li role="presentation"><a href="#current-active" aria-controls="current-active" role="tab" data-toggle="tab">Currently Active Task</a></li>
+  <li role="presentation"><a href="#new-unassigned" aria-controls="new-unassigned" role="tab" data-toggle="tab">New Unassigned Tasks</a></li>
+</ul>
+
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane fade in active" id="overdue">
+    <% if @tasks.incomplete.overdue.present? %>
       <% @tasks.incomplete.overdue.each do |task| %>
-        <tr>
-          <td>From: </td>
-          <td><%= link_to task.sender, task_url(task) %></td>
-          <td><%= link_to task.from_address, task_url(task) %></td>
-        </tr>
-        <tr></tr> <!-- keep these empty tr tags here for double stripe effects -->
-        <tr>
-          <td>To: </td>
-          <td><%= link_to task.receiver, task_url(task) %></td>
-          <td><%= link_to task.to_address, task_url(task) %></td>
-        </tr>
-
+        <div class="panel panel-danger">
+          <div class="panel-heading">
+            <h5 class="panel-title">OVERDUE TASK ID: <%= task.id %></h5>
+          </div>
+          <div class="panel-body">
+            <a href="<%= task_path(task) %>" >
+              <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-4">
+                  From:<br>
+                    <%= task.sender %><br>
+                    <%= task.from_address %>
+                </div>
+                <div class="col-sm-4">
+                  To:<br>
+                  <%= task.receiver %><br>
+                  <%= task.to_address %>
+                </div>
+              </div> <!-- end row -->
+            </a>
+          </div> <!-- end panel-body -->
+        </div> <!-- end class panel panel-danger -->
       <% end %>
-    </table>
+    <% end %>
   </div>
-<% end %>
 
-<% if @tasks.incomplete.todays.present? %>
-  <h3>CURRENT ACTIVE TASK</h3>
-  <div class="table-responsive">
-    <table class="table table-striped table-condensed">
-      <% @tasks.incomplete.todays.each do |task| %>
-        <tr>
-          <td>From: </td>
-          <td><%= link_to task.sender, task_url(task) %></td>
-          <td><%= link_to task.from_address, task_url(task) %></td>
-        </tr>
-        <tr></tr> <!-- keep these empty tr tags here for double stripe effects -->
-        <tr>
-          <td>To: </td>
-          <td><%= link_to task.receiver, task_url(task) %></td>
-          <td><%= link_to task.to_address, task_url(task) %></td>
-        </tr>
+    <div role="tabpanel" class="tab-pane fade" id="current-active">
+      <% if @tasks.incomplete.todays.present? %>
+        <% @tasks.incomplete.todays.each do |task| %>
+          <div class="panel panel-warning">
+            <div class="panel-heading">
+              <h5 class="panel-title">CURRENT ACTIVE TASK ID: <%= task.id %></h5>
+            </div>
+            <div class="panel-body">
+              <a href="<%= task_path(task) %>" >
+                <div class="row">
+                  <div class="col-sm-2"></div>
+                  <div class="col-sm-4">
+                    From:<br>
+                      <%= task.sender %><br>
+                      <%= task.from_address %>
+                  </div>
+                  <div class="col-sm-4">
+                    To:<br>
+                    <%= task.receiver %><br>
+                    <%= task.to_address %>
+                  </div>
+                </div> <!-- end row -->
+              </a>
+            </div> <!-- end panel-body -->
+          </div> <!-- end class panel panel-danger -->
+        <% end %>
       <% end %>
-    </table>
-  </div>
-<% end %>
+    </div>
 
-<% if Task.all.new_task.present? %>
-  <h3>TODAY'S TASKS</h3>
-  <div class="table-responsive">
-    <table class="table table-striped table-condensed">
-      <% Task.all.new_task.each do |task| %>
-        <tr>
-          <td>From: </td>
-          <td><%= link_to task.sender, task_url(task) %></td>
-          <td><%= link_to task.from_address, task_url(task) %></td>
-        </tr>
-        <tr></tr> <!-- keep these empty <tr> here for double stripe effects -->
-        <tr>
-          <td>To: </td>
-          <td><%= link_to task.receiver, task_url(task) %></td>
-          <td><%= link_to task.to_address, task_url(task) %></td>
-        </tr>
+    <div role="tabpanel" class="tab-pane fade" id="new-unassigned">
+      <% if Task.all.new_task.present? %>
+        <% Task.all.new_task.each do |task| %>
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h5 class="panel-title">NEW UNASSIGNED TASK ID: <%= task.id %></h5>
+            </div>
+            <div class="panel-body">
+              <a href="<%= task_path(task) %>" >
+                <div class="row">
+                  <div class="col-sm-2"></div>
+                  <div class="col-sm-4">
+                    From:<br>
+                      <%= task.sender %><br>
+                      <%= task.from_address %>
+                  </div>
+                  <div class="col-sm-4">
+                    To:<br>
+                    <%= task.receiver %><br>
+                    <%= task.to_address %>
+                  </div>
+                </div> <!-- end row -->
+              </a>
+            </div> <!-- end panel-body -->
+          </div> <!-- end class panel panel-danger -->
+        <% end %>
       <% end %>
-    </table>
-  </div>
-<% end %>
+    </div>
 
-<% if !(Task.all.new_task).present? %>
-  <h3>There is no pending task.</h3>
-<% end %>
+</div> <!-- end class tab-content -->

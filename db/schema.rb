@@ -75,6 +75,9 @@ ActiveRecord::Schema.define(version: 20150621234828) do
   create_table "users", force: :cascade do |t|
     t.string   "first_name",             default: "",                                 null: false
     t.string   "last_name",              default: "",                                 null: false
+    t.string   "phone1"
+    t.string   "phone2"
+    t.string   "address"
     t.float    "curr_lat",               default: -33.889242
     t.float    "curr_long",              default: 151.199098
     t.string   "curr_addr",              default: "7 Hudson Street Redfern NSW 2016"

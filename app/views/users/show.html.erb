@@ -1,0 +1,93 @@
+<div class="pull-left" role="links">
+  <ul class="list-inline">
+    <li><%= link_to "Tasks Index", root_url, class: "btn btn-primary btn-sm" %></li>
+    <li><%= link_to "Users Index", users_url, class: "btn btn-primary btn-sm" %></li>
+  </ul>
+</div>
+<br><br>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h5 class="panel-title">USER ID: <%= @user.id %></h5>
+  </div> <!-- end of panel-heading -->
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-sm-3">
+        <strong>NAME:</strong>
+      </div>
+      <div class="col-sm-9">
+        <%= [@user.first_name, @user.last_name].join(' ') %><br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <strong>PHONE 1:</strong>
+      </div>
+      <div class="col-sm-9">
+        <%= @user.phone1 %><br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <strong>PHONE 2:</strong>
+      </div>
+      <div class="col-sm-9">
+        <%= @user.phone2 %><br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <strong>ADDRESS:</strong>
+      </div>
+      <div class="col-sm-9">
+        <%= @user.address %><br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <strong>EMAIL:</strong>
+      </div>
+      <div class="col-sm-9">
+        <%= @user.email %><br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <strong>LAST KNOWN LOCATION:</strong>
+      </div>
+      <div class="col-sm-9">
+        <%= @user.curr_addr %><br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <strong>LAST KNOWN LATITUDE:</strong>
+      </div>
+      <div class="col-sm-9">
+        <%= @user.curr_lat %><br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <strong>LAST KNOWN LONGITUDE:</strong>
+      </div>
+      <div class="col-sm-9">
+        <%= @user.curr_long %><br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <strong>ROLE:</strong>
+      </div>
+      <div class="col-sm-9">
+        <% @user.roles.each do |role| %><%= role.name %><% end %><br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3 pull-left" role="links">
+        <ul class="list-inline">
+          <li><%= link_to "EDIT", edit_user_url(@user), class: "btn btn-warning btn-sm" %></li>
+        </ul>
+      </div>
+    </div> <!-- end class row -->
+  </div> <!-- end panel-body -->
+</div>

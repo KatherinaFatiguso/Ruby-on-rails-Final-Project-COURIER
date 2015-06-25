@@ -1,0 +1,64 @@
+<div class="pull-left" role="links">
+  <ul class="list-inline">
+    <li><%= link_to "Tasks Index", root_url, class: "btn btn-primary btn-sm" %></li>
+    <li><%= link_to "Customers Index", customers_url, class: "btn btn-primary btn-sm" %></li>
+  </ul>
+</div>
+<br><br>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h5 class="panel-title">CUSTOMER ID: <%= @customer.id %></h5>
+  </div> <!-- end of panel-heading -->
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-sm-2">
+        <strong>NAME:</strong>
+      </div>
+      <div class="col-sm-10">
+        <%= [@customer.first_name, @customer.last_name].join(' ') %><br>
+      </div>
+      <div class="col-sm-2">
+        <strong>COMPANY:</strong>
+      </div>
+      <div class="col-sm-10">
+        <%= @customer.company %><br>
+      </div>
+      <div class="col-sm-2">
+        <strong>PHONE 1:</strong>
+      </div>
+      <div class="col-sm-10">
+        <%= @customer.phone1 %><br>
+      </div>
+      <div class="col-sm-2">
+        <strong>PHONE 2:</strong>
+      </div>
+      <div class="col-sm-10">
+        <%= @customer.phone2 %><br>
+      </div>
+      <div class="col-sm-2">
+        <strong>EMAIL:</strong>
+      </div>
+      <div class="col-sm-10">
+        <%= @customer.email %><br>
+      </div>
+      <div class="col-sm-2">
+        <strong>ADDRESS:</strong>
+      </div>
+      <div class="col-sm-10">
+        <%= @customer.address %><br>
+      </div>
+      <div class="col-sm-2">
+        <strong>COMMENT:</strong>
+      </div>
+      <div class="col-sm-10">
+        <%= @customer.comment %><br>
+      </div>
+      <div class="col-sm-2 pull-left" role="links">
+        <ul class="list-inline">
+          <li><%= link_to "EDIT", edit_customer_url(@customer), class: "btn btn-warning btn-sm" %></li>
+        </ul>
+      </div>
+
+    </div> <!-- end class row -->
+  </div>
+</div>

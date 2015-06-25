@@ -1,115 +1,135 @@
 <div class="pull-left" role="links">
   <ul class="list-inline">
-
-    <li><%= link_to "Create Task", new_task_url, data: { confirm: 'Create a New Task?' }, class: "btn btn-primary btn-sm" %></li>
-
-    <li><%= link_to "View System Users", users_url, class: "btn btn-primary btn-sm" %></li>
-
     <li><%= link_to "View Customers", customers_url, class: "btn btn-primary btn-sm" %></li>
-
+    <li><%= link_to "View System Users", users_url, class: "btn btn-primary btn-sm" %></li>
+    <li><%= link_to "Create Task", new_task_url, data: { confirm: 'Create a New Task?' }, class: "btn btn-primary btn-sm" %></li>
   </ul>
 </div>
 <br><br>
 
-<% if @tasks.incomplete.present? %>
-<div class="panel panel-danger">
-  <div class="panel-heading">OVERDUE TASKS</div>
-      <div class="table-responsive">
-        <table class="table table-striped table-condensed">
-          <% @tasks.incomplete.each do |task|  %>
-            <tr>
-              <td>From: </td>
-              <td><%= link_to task.sender, task_url(task) %></td>
-              <td><%= link_to task.from_address, task_url(task) %></td>
-            </tr>
-            <tr></tr> <!-- keep these empty tr tags here for stripe effects -->
-            <tr>
-              <td>To: </td>
-              <td><%= link_to task.receiver, task_url(task) %></td>
-              <td><%= link_to task.to_address, task_url(task) %></td>
-            </tr>
-          <% end %>
-        </table>
-      </div>
-  </div> <!-- end panel panel-default -->
-<% else %>
-  <p>No Overdue Task.</p>
-<% end %>
 
+<ul class="nav nav-tabs" role="tablist">
+  <li role="presentation" class="active"><a href="#overdue" aria-controls="overdue" role="tab" data-toggle="tab">Overdue</a></li>
+  <li role="presentation"><a href="#new" aria-controls="new" role="tab" data-toggle="tab">New</a></li>
+  <li role="presentation"><a href="#completed" aria-controls="completed" role="tab" data-toggle="tab">Completed</a></li>
+  <li role="presentation"><a href="#archived" aria-controls="archived" role="tab" data-toggle="tab">Archived</a></li>
+</ul>
 
-<% if @tasks.new_task.present? %>
-  <div class="panel panel-warning">
-    <div class="panel-heading">NEW TASKS</div>
-      <div class="table-responsive">
-        <table class="table table-striped table-condensed">
-          <% @tasks.new_task.each do |task|  %>
-            <tr>
-              <td>From: </td>
-              <td><%= link_to task.sender, task_url(task) %></td>
-              <td><%= link_to task.from_address, task_url(task) %></td>
-            </tr>
-            <tr></tr> <!-- keep these empty tr tags here for stripe effects -->
-            <tr>
-              <td>To: </td>
-              <td><%= link_to task.receiver, task_url(task) %></td>
-              <td><%= link_to task.to_address, task_url(task) %></td>
-            </tr>
-          <% end %>
-        </table>
-      </div>
-  </div> <!-- end panel panel-default -->
-<% else %>
-  <p>No New Task.</p>
-<% end %>
-
-
-
-<% if @tasks.completed.present? %>
-  <div class="panel panel-success">
-    <div class="panel-heading">COMPLETED TASKS</div>
-      <div class="table-responsive">
-        <table class="table table-striped table-condensed">
-          <% @tasks.completed.each do |task|  %>
-            <tr>
-              <td>From: </td>
-              <td><%= link_to task.sender, task_url(task) %></td>
-              <td><%= link_to task.from_address, task_url(task) %></td>
-            </tr>
-            <tr></tr> <!-- keep these empty tr tags here for stripe effects -->
-            <tr>
-              <td>To: </td>
-              <td><%= link_to task.receiver, task_url(task) %></td>
-              <td><%= link_to task.to_address, task_url(task) %></td>
-            </tr>
-          <% end %>
-        </table>
-      </div>
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane fade in active" id="overdue">.
+    <% if @tasks.incomplete.present? %>
+      <% @tasks.incomplete.each do |task|  %>
+        <a href="<%= task_path(task) %>" >
+          <div class="panel panel-danger">
+            <div class="panel-heading">
+              <h5 class="panel-title">OVERDUE TASK ID: <%= task.id %></h5>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-4">
+                  From:<br>
+                    <%= task.sender %><br>
+                    <%= task.from_address %>
+                </div>
+                <div class="col-sm-4">
+                  To:<br>
+                  <%= task.receiver %><br>
+                  <%= task.to_address %>
+                </div>
+              </div> <!-- end row -->
+            </div> <!-- end panel-body -->
+          </div> <!-- end panel panel-danger -->
+        </a>
+      <% end %>
+    <% end %>
   </div>
-<% else %>
-  <p>No Incomplete Task.</p>
-<% end %>
 
-<% if @tasks.archived.present? %>
-<div class="panel panel-primary">
-  <div class="panel-heading">ARCHIVED TASKS</div>
-    <div class="table-responsive">
-      <table class="table table-striped table-condensed">
-        <% @tasks.archived.each do |task|  %>
-          <tr>
-            <td>From: </td>
-            <td><%= link_to task.sender, task_url(task) %></td>
-            <td><%= link_to task.from_address, task_url(task) %></td>
-          </tr>
-          <tr></tr> <!-- keep these empty tr tags here for stripe effects -->
-          <tr>
-            <td>To: </td>
-            <td><%= link_to task.receiver, task_url(task) %></td>
-            <td><%= link_to task.to_address, task_url(task) %></td>
-          </tr>
-        <% end %>
-      </table>
-    </div>
-  </div> <!-- end panel panel-default -->
-<% else %>
-  <p>No Archived Task.</p>
-<% end %>
+  <div role="tabpanel" class="tab-pane fade" id="new">
+    <% if @tasks.new_task.present? %>
+      <% @tasks.new_task.each do |task|  %>
+        <a href="<%= task_path(task) %>" >
+          <div class="panel panel-warning">
+            <div class="panel-heading">
+              <h5 class="panel-title">NEW TASK ID: <%= task.id %></h5>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-4">
+                  From:<br>
+                    <%= task.sender %><br>
+                    <%= task.from_address %>
+                </div>
+                <div class="col-sm-4">
+                  To:<br>
+                  <%= task.receiver %><br>
+                  <%= task.to_address %>
+                </div>
+              </div> <!-- end row -->
+            </div> <!-- end panel-body -->
+          </div> <!-- end panel panel-warning -->
+        </a>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div role="tabpanel" class="tab-pane fade" id="completed">
+    <% if @tasks.completed.present? %>
+      <% @tasks.completed.each do |task|  %>
+        <a href="<%= task_path(task) %>" >
+          <div class="panel panel-success">
+            <div class="panel-heading">
+              <h5 class="panel-title">COMPLETED TASK ID: <%= task.id %></h5>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-4">
+                  From:<br>
+                    <%= task.sender %><br>
+                    <%= task.from_address %>
+                </div>
+                <div class="col-sm-4">
+                  To:<br>
+                  <%= task.receiver %><br>
+                  <%= task.to_address %>
+                </div>
+              </div> <!-- end row -->
+            </div> <!-- end panel-body -->
+          </div> <!-- end panel-success -->
+        </a>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div role="tabpanel" class="tab-pane fade" id="archived">
+    <% if @tasks.archived.present? %>
+      <% @tasks.archived.each do |task|  %>
+        <a href="<%= task_path(task) %>" >
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h5 class="panel-title">ARCHIVED TASK ID: <%= task.id %></h5>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-4">
+                  From:<br>
+                    <%= task.sender %><br>
+                    <%= task.from_address %>
+                </div>
+                <div class="col-sm-4">
+                  To:<br>
+                  <%= task.receiver %><br>
+                  <%= task.to_address %>
+                </div>
+              </div> <!-- end row -->
+            </div> <!-- end panel-body -->
+          </div> <!-- end panel panel-primary -->
+        </a>
+      <% end %>
+    <% end %>
+  </div>
+
+</div> <!-- end class tab-content -->

@@ -10,8 +10,8 @@ class TaskDecorator < Draper::Decorator
   end
 
   def label
-    if object.sign_required?
-      if !(object.signed?)
+    if object.sign_required
+      if !(object.signed)
         h.content_tag(:span, "Not Signed", class: "label label-warning")
       end
     end

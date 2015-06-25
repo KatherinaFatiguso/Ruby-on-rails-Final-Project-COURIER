@@ -43,6 +43,9 @@ customer3 = Customer.create!(
 admin1 = User.create!(
   first_name: 'Jenny',
   last_name: 'Davies',
+  phone1: '0404 222 004',
+  phone2: '02 9922 8888',
+  address: '26 Railway St, Hurlstone Park NSW 2193',
   email: 'jenny@mail.com',
   password: 'passwordjenny',
   password_confirmation: 'passwordjenny'
@@ -52,6 +55,9 @@ admin1.add_role :admin
 admin2 = User.create!(
   first_name: 'Bill',
   last_name: 'Demov',
+  phone1: '0404 000 004',
+  phone2: '02 9999 8888',
+  address: '192 Parramatta Rd, Stanmore NSW 2048',
   email: 'bill@mail.com',
   password: 'passwordbill',
   password_confirmation: 'passwordbill'
@@ -61,6 +67,9 @@ admin2.add_role :admin
 courier1 = User.create!(
   first_name: 'Paul',
   last_name: 'Bartlett',
+  phone1: '0404 111 004',
+  phone2: '02 9911 8888',
+  address: '36 Pembroke St, Ashfield NSW 2131',
   email: 'paul@mail.com',
   password: 'passwordpaul',
   password_confirmation: 'passwordpaul'
@@ -70,6 +79,9 @@ courier1.add_role :courier
 courier2 = User.create!(
   first_name: 'Ruth',
   last_name: 'Rendell',
+  phone1: '0404 111 004',
+  phone2: '02 9911 8888',
+  address: '7 Waters Rd, Neutral Bay NSW 2089',
   email: 'ruth@mail.com',
   password: 'passwordruth',
   password_confirmation: 'passwordruth'
@@ -77,6 +89,7 @@ courier2 = User.create!(
 courier2.add_role :courier
 
 task1 = Task.create!(
+  customer_id: customer1.id,
   sender: "Laura George",
   from_address: "80 William Street, East Sydney NSW 2010",
   receiver: "Martin Broadbill",
@@ -85,10 +98,9 @@ task1 = Task.create!(
   sign_required: true,
   item_count: 1
 )
-task1.customer = customer1
-task1.save
 
 task2 = Task.create!(
+  customer_id: customer2.id,
   sender: "Maria Pirrotina",
   from_address: "186 McElhone Street, Kings Cross NSW 2011",
   receiver: "Jesse Alban",
@@ -97,10 +109,9 @@ task2 = Task.create!(
   sign_required: true,
   item_count: 1
 )
-task2.customer = customer2
-task2.save
 
 task3 = Task.create!(
+  customer_id: customer3.id,
   sender: "Donna Karan",
   from_address: "40 Lucy St, Ashfield NSW 2131",
   receiver: "Murray Mayne",
@@ -108,10 +119,9 @@ task3 = Task.create!(
   info: "Please enter through the Loading Dock. Thank you.",
   item_count: 3
 )
-task3.customer = customer3
-task3.save
 
 task4 = Task.create!(
+  customer_id: customer3.id,
   sender: "Karen Martina",
   from_address: "255 Elizabeth Street, Sydney NSW 2000",
   receiver: "Jimmy Lane",
@@ -119,10 +129,9 @@ task4 = Task.create!(
   info: "Please enter through the Loading Dock. Thank you.",
   item_count: 2
 )
-task4.customer = customer3
-task4.save
 
 task5 = Task.create!(
+  customer_id: customer3.id,
   sender: "Mary Poppler",
   from_address: "1 Rothschild Ave, Rosebery NSW 2018",
   receiver: "Peter Sanders",
@@ -130,11 +139,10 @@ task5 = Task.create!(
   info: "Please enter through the Loading Dock. Thank you.",
   item_count: 1
 )
-task5.customer = customer3
-task5.save
-
 
 task6 = Task.create!(
+  customer_id: customer1.id,
+  user_id: courier1.id,
   sender: "Jonathan Anton",
   from_address: "7 Henry Street, Parramatta NSW 2150",
   receiver: "Mary William",
@@ -147,12 +155,10 @@ task6 = Task.create!(
   signed: false,
   item_count: 2
 )
-task6.customer = customer1
-task6.user = courier1
-task6.save
-
 
 task7 = Task.create!(
+  customer_id: customer2.id,
+  user_id: courier2.id,
   sender: "Jacob Marc",
   from_address: "347 Kent Street, Sydney NSW 2000",
   receiver: "William Marshall",
@@ -165,12 +171,9 @@ task7 = Task.create!(
   signed: false,
   item_count: 1
 )
-task7.customer = customer2
-task7.user = courier2
-task7.save
-
 
 task8 = Task.create!(
+  customer_id: customer3.id,
   sender: "Peter Roger",
   from_address: "52 Martin Place, Sydney NSW 2000",
   receiver: "Maria Martina",
@@ -183,11 +186,9 @@ task8 = Task.create!(
   signed: true,
   item_count: 1
 )
-task8.customer = customer3
-task8.save
-
 
 task9 = Task.create!(
+  customer_id: customer2.id,
   sender: "Anne Murray",
   from_address: "199 George St, Sydney NSW 2000",
   receiver: "Steve Pirrotina",
@@ -200,11 +201,9 @@ task9 = Task.create!(
   signed: true,
   item_count: 1
 )
-task9.customer = customer2
-task9.save
-
 
 task10 = Task.create!(
+  customer_id: customer2.id,
   sender: "Mary Wilson",
   from_address: "65 Meeks St, Kingsford NSW 2032",
   receiver: "Jim Sanders",
@@ -217,5 +216,3 @@ task10 = Task.create!(
   signed: true,
   item_count: 1
 )
-task10.customer = customer2
-task10.save

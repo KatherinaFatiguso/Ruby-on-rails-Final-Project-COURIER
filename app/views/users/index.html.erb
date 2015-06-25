@@ -1,33 +1,39 @@
 <div class="pull-left" role="links">
   <ul class="list-inline">
     <li><%= link_to "Tasks Index", root_url, class: "btn btn-primary btn-sm" %></li>
-    <li><%= link_to "Create Customer", new_customer_url, class: "btn btn-success btn-sm" %></li>
+    <li><%= link_to "Create User", new_user_url, class: "btn btn-success btn-sm" %></li>
   </ul>
 </div>
 <br><br>
-<h5>LIST OF CUSTOMERS</h5>
-<% @customers.sort.each do |customer| %>
-  <a href="<%= customer_path(customer) %>" >
+<h5>LIST OF USERS</h5>
+<% @users.sort.each do |user| %>
+  <a href="<%= user_path(user) %>" >
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <h5 class="panel-title">CUSTOMER ID: <%= customer.id %></h5>
+        <h5 class="panel-title">USER ID: <%= user.id %></h5>
       </div> <!-- end of panel-heading -->
-      <div class="panel-body">
+        <div class="panel-body">
           <div class="row">
             <div class="col-sm-2">
               <strong>NAME:</strong>
             </div>
             <div class="col-sm-10">
-              <%= [customer.first_name, customer.last_name].join(' ') %><br>
+              <%= [user.first_name, user.last_name].join(' ') %><br>
             </div>
             <div class="col-sm-2">
               <strong>PHONE 1:</strong>
             </div>
             <div class="col-sm-10">
-              <%= customer.phone1 %><br>
+              <%= user.phone1 %><br>
+            </div>
+            <div class="col-sm-2">
+              <strong>ROLE:</strong>
+            </div>
+            <div class="col-sm-10">
+              <% user.roles.each do |role| %><%= role.name %><% end %><br>
             </div>
           </div> <!-- end class row -->
-      </div>
+        </div>
     </div>
   </a>
 <% end %>

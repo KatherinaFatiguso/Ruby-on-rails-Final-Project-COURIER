@@ -23,10 +23,16 @@
         <li><%= link_to "Archive", archive_task_url(@task), method: :post, data: { confirm: 'Archive this Task?' }, class: "btn btn-warning btn-sm" %></li>
       <% end %>
     <% end %>
-
-
   </ul>
 </div>
+<br><br>
+<iframe
+  width="600"
+  height="450"
+  frameborder="0" style="border:0"
+  src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyAD-fxTCN1rDW_OFktys6YPVnet1UbZnTs&origin=<%=@task.from_address.gsub(' ', '+')%>&destination=<%=@task.to_address.gsub(' ', '+')%>" allowfullscreen>
+</iframe>
+
 <br><br>
 <h5>Task ID <%= @task.id %>, status: <strong class="text-uppercase"><%= @task.status %></strong></h5>
 
@@ -50,7 +56,7 @@
     </tr>
     <tr>
       <td>Customer: </td>
-      <td><%= [@task.customer.first_name, @task.customer.last_name].compact.join(' ') %></td>
+      <td><%= link_to [@task.customer.first_name, @task.customer.last_name].compact.join(' '), customer_url(@task.customer) %></td>
     </tr>
     <tr>
       <td>Customer Company: </td>
@@ -88,11 +94,11 @@
     </tr>
     <tr>
       <td>Signature Required? </td>
-      <td><%= @task.sign_required? %></td>
+      <td><%= @task.sign_required %></td>
     </tr>
     <tr>
       <td>Signed? </td>
-      <td><%= @task.signed? %> <%= @task.label %></td>
+      <td><%= @task.signed %> <span class="label label-warning"><%= @task.label %></span></td>
     </tr>
     <tr>
       <td>Item Count </td>

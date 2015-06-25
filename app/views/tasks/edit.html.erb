@@ -1,27 +1,12 @@
-<div class="row">
-  <div class="col-sm-6">
-    <% if @task.errors.any? %>
-      <div id="error_explanation">
-        <ul>
-          <% @task.errors.full_messages.each do |msg| %>
-            <p><%= msg %></p>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
-    <div class="pull-left" role="links">
-      <ul class="list-inline">
-        <li> <%= link_to "Back to Task", task_url(@task), class: "btn btn-info btn-sm" %> </li>
-      </ul>
-    </div>
-    <br><br>
-    <h5>Edit Task ID <%= @task.id %>, status: <strong class="text-uppercase"><%= @task.status %></strong></h5>
-    <% if current_user.has_role? :admin %>
-      <%= render partial: 'form' %>
-    <% elsif current_user.has_role? :courier %>
-      <%= render partial: 'form1' %>
-    <% end %>
-
-  </div>
+<div class="pull-left" role="links">
+  <ul class="list-inline">
+    <li> <%= link_to "Back to Task", task_url(@task), class: "btn btn-info btn-sm" %> </li>
+  </ul>
 </div>
+<br><br>
+<h5>Edit Task ID <%= @task.id %>, status: <strong class="text-uppercase"><%= @task.status %></strong></h5>
+<% if current_user.has_role? :admin %>
+  <%= render partial: 'form' %>
+<% elsif current_user.has_role? :courier %>
+  <%= render partial: 'form1' %>
+<% end %>

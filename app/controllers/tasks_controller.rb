@@ -33,7 +33,7 @@ class TasksController < ApplicationController
 
     if @task.save
       create_message("Task created.")
-      redirect_to task_url(@task) #redirect to tasks#show
+      redirect_to task_url(@task), notice: "Created A Task" #redirect to tasks#show
     else
       render :new
     end
@@ -60,7 +60,7 @@ class TasksController < ApplicationController
         :item_count
       ))
       create_message("Task Updated.")
-      redirect_to task_url(@task), notice: "Task updated."
+      redirect_to task_url(@task), notice: "Task Updated"
     else
       render :edit
     end
@@ -73,7 +73,7 @@ class TasksController < ApplicationController
 
   def accept_task
     @task = Task.find(params[:id])
-    @task.accept!
+    @task.accept!(current_user.id)
     redirect_to task_url(@task), notice: "Task Accepted."
   end
 
