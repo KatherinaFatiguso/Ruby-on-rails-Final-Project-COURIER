@@ -24,6 +24,7 @@
   <li role="presentation" class="active"><a href="#overdue" aria-controls="overdue" role="tab" data-toggle="tab">Overdue</a></li>
   <li role="presentation"><a href="#current-active" aria-controls="current-active" role="tab" data-toggle="tab">Currently Active Task</a></li>
   <li role="presentation"><a href="#new-unassigned" aria-controls="new-unassigned" role="tab" data-toggle="tab">New Unassigned Tasks</a></li>
+  <li role="presentation"><a href="#update-location" aria-controls="update-location" role="tab" data-toggle="tab">Update My Current Location</a></li>
 </ul>
 
 <div class="tab-content">
@@ -87,7 +88,7 @@
 
     <div role="tabpanel" class="tab-pane fade" id="new-unassigned">
       <% if Task.all.new_task.present? %>
-        <% Task.all.new_task.each do |task| %>
+        <% Task.all.new_task.sorted(current_user.curr_lat, current_user.curr_long).each do |task| %>
           <div class="panel panel-primary">
             <div class="panel-heading">
               <h5 class="panel-title">NEW UNASSIGNED TASK ID: <%= task.id %></h5>
@@ -113,5 +114,24 @@
         <% end %>
       <% end %>
     </div>
+
+    <div role="tabpanel" class="tab-pane fade" id="update-location">
+      <br>
+      <%= simple_form_for(current_user, url: update_location_user_path(current_user)) do |f| %>
+        <%= f.input :curr_addr, label: "Update My Current Location:", class: 'form-control' %>
+        <br>
+        <%= f.submit %>
+      <% end %>
+      <br><br>
+      <iframe
+        width="600"
+        height="450"
+        frameborder="0" style="border:0"
+        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAD-fxTCN1rDW_OFktys6YPVnet1UbZnTs&q=<%=current_user.curr_addr.gsub(' ', '+')%>" allowfullscreen>
+      </iframe>
+    </div>
+
+
+
 
 </div> <!-- end class tab-content -->

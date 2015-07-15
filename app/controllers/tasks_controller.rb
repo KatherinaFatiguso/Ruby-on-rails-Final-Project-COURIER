@@ -8,7 +8,6 @@ class TasksController < ApplicationController
 
   def my
     @tasks = current_user.tasks
-    @tasks.sorted(current_user.curr_lat, current_user.curr_long)
   end
 
   def new
@@ -73,8 +72,12 @@ class TasksController < ApplicationController
 
   def accept_task
     @task = Task.find(params[:id])
-    @task.accept!(current_user.id)
-    redirect_to task_url(@task), notice: "Task Accepted."
+    if @task.accept!(current_user.id)
+      create_message("Task Accepted.")
+      redirect_to task_url(@task), notice: "Task Accepted."
+    else
+      redirect_to task_url(@task)
+    end
   end
 
   def complete
@@ -84,21 +87,24 @@ class TasksController < ApplicationController
         redirect_to edit_task_url(@task), notice: "Require Client's Signature - Not Signed."
       else
         @task.complete!
+        create_message("Task Completed.")
         current_user.update_location!(@task.to_address)
         redirect_to task_url(@task), notice: "Task Completed."
       end
     else
-      redirect_to task_url(@task), notice: "Task Completed."
+      redirect_to task_url(@task)
     end
   end
 
   def archive
     @task = Task.find(params[:id])
-    @task.archive!
-    redirect_to task_url(@task), notice: "Task Archived."
+    if @task.archive!
+      create_message("Task Archived.")
+      redirect_to task_url(@task), notice: "Task Archived."
+    else
+      redirect_to task_url(@task)
+    end
   end
-
-
 
   private
 

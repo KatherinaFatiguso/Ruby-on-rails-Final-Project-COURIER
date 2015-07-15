@@ -3,7 +3,9 @@
     <li><%= link_to "Tasks Index", root_url, class: "btn btn-primary btn-sm" %></li>
 
     <% if (@task.status == "new_task") %>
-      <li><%= link_to "Accept This Task", accept_task_task_url(@task), method: :post, data: { confirm: 'Are you sure you want to accept this task?' }, class: "btn btn-warning btn-sm" %></li>
+      <% if current_user.has_role? :courier %>
+        <li><%= link_to "Accept This Task", accept_task_task_url(@task), method: :post, data: { confirm: 'Are you sure you want to accept this task?' }, class: "btn btn-warning btn-sm" %></li>
+      <% end %>
     <% end %>
 
     <li><%= link_to "Add Message", new_task_message_url(@task), data: { confirm: 'Add a message to this task?' }, class: "btn btn-primary btn-sm" %></li>

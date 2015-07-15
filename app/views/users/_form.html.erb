@@ -5,5 +5,8 @@
   <%= f.input :phone2 %>
   <%= f.input :address %>
   <%= f.input :email %>
+  <% if @user.new_record? %>
+    <%= f.input :password %>
+  <% end %>
   <%= f.submit %>
 <% end %>

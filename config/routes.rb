@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :users
+  resources :users do
+    member do
+      patch :update_location
+    end
+  end
 
   root 'tasks#index'
 

@@ -1,0 +1,15 @@
+<div class="pull-left" role="links">
+  <ul class="list-inline">
+    <li><%= link_to "System Users Index", users_url, class: "btn btn-primary btn-sm" %></li>
+  </ul>
+</div>
+<br><br>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h5 class="panel-title">NEW USER</h5>
+  </div> <!-- end of panel-heading -->
+  <div class="panel-body">
+    <%= render partial: 'form' %>
+  </div>
+</div>
