@@ -35,6 +35,8 @@ gem 'simple_form'
 gem 'draper'
 gem 'devise'
 gem 'devise-bootstrap-views'
+gem 'geocoder'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -52,10 +54,10 @@ group :development, :test do
   gem 'faker'
   gem 'timecop'
   gem 'rails_12factor', group: :production
-  gem 'geocoder'
+  # gem 'geocoder'
   gem 'rolify'
   gem 'cancancan', '~> 1.10'
-  
+
   source 'https://rails-assets.org' do
     gem 'rails-assets-bootstrap'
   end
