@@ -36,7 +36,13 @@ gem 'draper'
 gem 'devise'
 gem 'devise-bootstrap-views'
 gem 'geocoder'
+gem 'rails_12factor', group: :production
+gem 'rolify'
+gem 'cancancan', '~> 1.10'
 
+source 'https://rails-assets.org' do
+  gem 'rails-assets-bootstrap'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -53,13 +59,6 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'timecop'
-  gem 'rails_12factor', group: :production
-  # gem 'geocoder'
-  gem 'rolify'
-  gem 'cancancan', '~> 1.10'
 
-  source 'https://rails-assets.org' do
-    gem 'rails-assets-bootstrap'
-  end
 
 end
