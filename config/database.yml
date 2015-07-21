@@ -18,8 +18,3 @@
     <<: *auth
     <<: *postgres
     database: courier_test
-
-  production:
-    <<: *auth
-    <<: *postgres
-    database: courier_development
